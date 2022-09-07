@@ -16,7 +16,7 @@
  */
 template <typename T>
 List<T>::List() {
-  data_ = new t[BASESIZE];
+  data_ = new T[BASESIZE];
   insertp_ = data_;
   fullp_ = data_ + BASESIZE;
 }
@@ -25,7 +25,7 @@ List<T>::List() {
  * default destructor
  */
 template <typename T>
-List<T>::List() {
+List<T>::~List() {
   delete [] data_;
 }
 
@@ -34,8 +34,17 @@ List<T>::List() {
  */
 template <typename T>
 void List<T>::insertAtFront(const T & data) {
-  //move right
+  _shiftright();
   *data_ = data;
+}
+/**
+ * _shiftright
+ */ 
+template <typename T>
+void List<T>::_shiftright() {
+  // This should probably do something
+  // Shift the data in the list one space right
+  // Adding space if the list fills up
 }
 
 /**
@@ -45,6 +54,18 @@ template <typename T>
 void List<T>::insertAtBack(const T & data) {
   *insertp_ = data;
   ++insertp_;
+  if(insertp_ == fullp_){
+    _addspace();
+  }
+}
+
+/**
+ * _addspace
+ */ 
+template <typename T>
+void List<T>::_addspace() {
+  // This should probably do something
+  // allocate more space for list elements
 }
 
 /**
@@ -68,8 +89,18 @@ void  List<T>::removeBack() {
  */
 template <typename T>
 void  List<T>::removeFront() {
-  //move left
+  _shiftleft();
   --insertp_;
+}
+
+/**
+ * _shiftleft
+ */ 
+template <typename T>
+void List<T>::_shiftleft() {
+  // This should probably do something
+  // This moves all the elements in the list one to left
+  // The first element in the list is lost
 }
 
 /**
@@ -82,4 +113,20 @@ bool  List<T>::isEmpty() {
   } else {
     return false;
   }
+}
+
+/**
+ * isEmpty
+ */
+template <typename T>
+int List<T>::size() {
+  return insertp_ - data_;
+}
+
+/**
+ * isEmpty
+ */
+template <typename T>
+int List<T>::capacity() {
+  return fullp_ - data_;
 }

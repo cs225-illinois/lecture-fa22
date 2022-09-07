@@ -19,11 +19,17 @@ class List {
     void removeFront();
     void removeBack();
     bool isEmpty();
+    int size();
+    int capacity();
 
   private:
     T *data_;
     T *insertp_;
     T *fullp_;
+
+    void _addspace();
+    void _shiftright();
+    void _shiftleft();
 };
 
 #include "List.hpp"
